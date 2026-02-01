@@ -7,19 +7,95 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Helvetica, Arial, sans-serif; background: #fff; color: #000; }
+
+    /* Desktop sidebar */
+    .sidebar {
+      display: none;
+    }
+    @media (min-width: 769px) {
+      .sidebar {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        height: 100vh;
+        padding: 40px;
+        overflow-y: auto;
+      }
+      .sidebar .logo {
+        font-size: 28px;
+        font-weight: 700;
+        text-decoration: none;
+        color: #000;
+        letter-spacing: -0.5px;
+        display: block;
+        margin-bottom: 30px;
+        line-height: 1.2;
+      }
+      .sidebar nav ul {
+        list-style: none;
+        margin-bottom: 40px;
+      }
+      .sidebar nav ul li {
+        margin: 12px 0;
+      }
+      .sidebar nav ul li a {
+        text-decoration: none;
+        color: #000;
+        font-size: 18px;
+        font-weight: 300;
+        transition: opacity 0.2s;
+      }
+      .sidebar nav ul li a:hover {
+        opacity: 0.5;
+      }
+      .sidebar .social-icons {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+      }
+      .sidebar .social-icons a {
+        color: #000;
+        text-decoration: none;
+        font-size: 18px;
+        transition: opacity 0.2s;
+      }
+      .sidebar .social-icons a:hover {
+        opacity: 0.5;
+      }
+      header {
+        display: none !important;
+      }
+      .menu-overlay {
+        display: none !important;
+      }
+      main {
+        margin-left: 280px;
+        margin-top: 0 !important;
+        padding: 40px !important;
+      }
+      footer {
+        margin-left: 280px;
+      }
+    }
+
+    /* Mobile header */
     header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: #fff; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 24px; font-weight: 700; text-decoration: none; color: #000; font-family: Helvetica, Arial, sans-serif; letter-spacing: -0.5px; }
+    .header-logo { font-size: 24px; font-weight: 700; text-decoration: none; color: #000; letter-spacing: -0.5px; }
     .menu-toggle { background: none; border: none; cursor: pointer; padding: 5px; display: flex; flex-direction: column; gap: 4px; z-index: 1001; }
     .menu-toggle span { display: block; width: 20px; height: 2px; background: #000; transition: all 0.3s ease; }
     .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .menu-toggle.active span:nth-child(2) { opacity: 0; }
     .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
     .menu-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #ff6600; z-index: 999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
     .menu-overlay.active { opacity: 1; pointer-events: all; }
     .menu-overlay nav ul { list-style: none; text-align: left; padding-left: 40px; }
     .menu-overlay nav ul li { margin: 25px 0; }
     .menu-overlay nav ul li a { text-decoration: none; color: #fff; font-size: 32px; font-weight: 300; transition: opacity 0.2s; }
     .menu-overlay nav ul li a:hover { opacity: 0.7; }
+
     main { margin-top: 74px; padding: 40px; }
     h1 { font-size: 32px; font-weight: 700; margin-bottom: 40px; }
     .contact-section { margin-bottom: 50px; }
@@ -36,10 +112,11 @@
     .page-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 15px; }
     footer { background: #fff; padding: 40px 30px; text-align: center; border-top: 1px solid #000; }
     footer p { font-size: 12px; line-height: 1.8; margin: 5px 0; }
+
     @media (max-width: 768px) {
       .page-header h1 { font-size: 28px; }
       header { padding: 15px 20px; }
-      .logo { font-size: 20px; }
+      .header-logo { font-size: 20px; }
       main { margin-top: 60px; padding: 20px; }
       h1 { font-size: 28px; }
       .contact-section p { font-size: 16px; }
@@ -48,17 +125,48 @@
   </style>
 </head>
 <body>
+
+  <!-- Desktop sidebar -->
+  <aside class="sidebar">
+    <a href="index.html" class="logo">Alex<br>Bailey</a>
+    <nav>
+      <ul>
+        <li><a href="photography.html">Photography</a></li>
+        <li><a href="film-tv.html">Film/TV</a></li>
+        <li><a href="commercial.html">Commercial</a></li>
+        <li><a href="social.html">Social</a></li>
+        <li><a href="vocals-acting.html">Vocals + Acting</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/alexfbailey" target="_blank" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@alexfbailey" target="_blank" aria-label="TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.83 4.83 0 01-1-.15z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@alexfbailey" target="_blank" aria-label="YouTube">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/share/17qSmUW3v4/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Mobile header -->
   <header>
-    <a href="index.html" class="logo">Alex Bailey</a>
+    <a href="index.html" class="header-logo">Alex Bailey</a>
     <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </header>
 
+  <!-- Mobile menu overlay -->
   <div class="menu-overlay">
     <nav>
       <ul>
-        <li><a href="index.html">Home</a></li>
         <li><a href="photography.html">Photography</a></li>
         <li><a href="film-tv.html">Film/TV</a></li>
         <li><a href="commercial.html">Commercial</a></li>
