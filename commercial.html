@@ -5,42 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Commercial - Alex Bailey</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Helvetica, Arial, sans-serif; background: #fff; color: #000; }
-    header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: #fff; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 24px; font-weight: 700; text-decoration: none; color: #000; font-family: Helvetica, Arial, sans-serif; letter-spacing: -0.5px; }
-    .menu-toggle { background: none; border: none; cursor: pointer; padding: 5px; display: flex; flex-direction: column; gap: 4px; z-index: 1001; }
-    .menu-toggle span { display: block; width: 20px; height: 2px; background: #000; transition: all 0.3s ease; }
-    .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    body { font-family: 'EB Garamond', 'Times New Roman', Georgia, serif; background: #fff; color: #000; -webkit-font-smoothing: antialiased; }
+
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: #fff; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e8e8e8; }
+    .logo { font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 500; text-decoration: none; color: #000; letter-spacing: 0.02em; }
+    .desktop-nav { display: flex; gap: 28px; align-items: center; }
+    .desktop-nav a { font-family: 'EB Garamond', serif; font-size: 15px; font-weight: 400; text-decoration: none; color: #000; letter-spacing: 0.02em; transition: opacity 0.2s ease; position: relative; }
+    .desktop-nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: #000; transition: width 0.3s ease; }
+    .desktop-nav a:hover::after { width: 100%; }
+    .desktop-nav a:hover { opacity: 0.6; }
+    .desktop-nav a.active { border-bottom: 1px solid #000; }
+
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 5px; flex-direction: column; gap: 5px; z-index: 1001; }
+    .menu-toggle span { display: block; width: 22px; height: 1px; background: #000; transition: all 0.3s ease; }
+    .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
     .menu-toggle.active span:nth-child(2) { opacity: 0; }
-    .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
-    .menu-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #ff6600; z-index: 999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+    .menu-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #fff; z-index: 999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
     .menu-overlay.active { opacity: 1; pointer-events: all; }
-    .menu-overlay nav ul { list-style: none; text-align: left; padding-left: 40px; }
-    .menu-overlay nav ul li { margin: 25px 0; }
-    .menu-overlay nav ul li a { text-decoration: none; color: #fff; font-size: 32px; font-weight: 300; transition: opacity 0.2s; }
-    .menu-overlay nav ul li a:hover { opacity: 0.7; }
-    main { margin-top: 74px; padding: 40px; }
-    .project { margin-bottom: 60px; }
-    .video-container { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 20px; }
+    .menu-overlay nav ul { list-style: none; text-align: center; }
+    .menu-overlay nav ul li { margin: 20px 0; }
+    .menu-overlay nav ul li a { font-family: 'EB Garamond', serif; text-decoration: none; color: #000; font-size: 28px; font-weight: 400; letter-spacing: 0.02em; transition: opacity 0.2s; }
+    .menu-overlay nav ul li a:hover { opacity: 0.5; }
+
+    main { margin-top: 73px; padding: 60px 40px; max-width: 960px; margin-left: auto; margin-right: auto; }
+
+    .page-title { font-family: 'EB Garamond', serif; font-size: 36px; font-weight: 500; margin-bottom: 50px; letter-spacing: 0.02em; }
+
+    .project { margin-bottom: 70px; }
+    .project:last-child { margin-bottom: 0; }
+
+    .video-container { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 16px; background: #f0f0f0; }
     .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-    .project-title { font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; margin-bottom: 8px; line-height: 1.6; }
-    .page-header { margin-bottom: 40px; }
-    .page-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 15px; }
-    footer { background: #fff; padding: 40px 30px; text-align: center; border-top: 1px solid #000; }
-    footer p { font-size: 12px; line-height: 1.8; margin: 5px 0; }
+
+    .project-title { font-family: 'EB Garamond', serif; font-size: 17px; font-weight: 400; letter-spacing: 0.02em; color: #444; }
+
+    footer { padding: 40px; text-align: center; border-top: 1px solid #e8e8e8; }
+    footer p { font-family: 'EB Garamond', serif; font-size: 12px; color: #999; line-height: 1.8; letter-spacing: 0.02em; }
+
     @media (max-width: 768px) {
-      .page-header h1 { font-size: 28px; }
-      header { padding: 15px 20px; }
-      .logo { font-size: 20px; }
-      main { margin-top: 60px; padding: 20px; }
-      .project-title { font-size: 16px; }
+      header { padding: 18px 20px; }
+      .logo { font-size: 19px; }
+      .desktop-nav { display: none; }
+      .menu-toggle { display: flex; }
+      main { margin-top: 58px; padding: 40px 20px; }
+      .page-title { font-size: 28px; margin-bottom: 35px; }
+      .project { margin-bottom: 45px; }
+      .project-title { font-size: 15px; }
+      footer { padding: 30px 20px; }
     }
   </style>
 </head>
 <body>
+
   <header>
     <a href="/" class="logo">Alex Bailey</a>
+    <nav class="desktop-nav">
+      <a href="photography">Photography</a>
+      <a href="film-tv">Film/TV</a>
+      <a href="commercial" class="active">Commercial</a>
+      <a href="social">Social</a>
+      <a href="vocals-acting">Vocals + Acting</a>
+      <a href="contact">Contact</a>
+    </nav>
     <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -61,57 +91,55 @@
   </div>
 
   <main>
-    <div class="page-header">
-      <h1>Commercial</h1>
-    </div>
+    <h1 class="page-title">Commercial</h1>
 
     <div class="project">
       <div class="video-container">
         <iframe src="https://www.youtube.com/embed/hbj4uoz2UKE?controls=1&modestbranding=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <div class="project-title">Walmart Easter 01 campaign directed by Alex Bailey</div>
+      <div class="project-title">Walmart Easter 01</div>
     </div>
 
     <div class="project">
       <div class="video-container">
         <iframe src="https://www.youtube.com/embed/a0qZB_aRb8s?controls=1&modestbranding=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <div class="project-title">Walmart Easter 02 campaign directed by Alex Bailey</div>
+      <div class="project-title">Walmart Easter 02</div>
     </div>
 
     <div class="project">
       <div class="video-container">
         <iframe src="https://www.youtube.com/embed/iT1hNIP-adw?controls=1&modestbranding=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <div class="project-title">Walmart Easter 03 campaign directed by Alex Bailey</div>
+      <div class="project-title">Walmart Easter 03</div>
     </div>
 
     <div class="project">
       <div class="video-container">
         <iframe src="https://www.youtube.com/embed/n7uFzE5gLzA?controls=1&modestbranding=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <div class="project-title">Walmart Easter 04 campaign directed by Alex Bailey</div>
+      <div class="project-title">Walmart Easter 04</div>
     </div>
 
     <div class="project">
       <div class="video-container">
         <iframe src="https://www.youtube.com/embed/MEW1fK3fYdQ?controls=1&modestbranding=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <div class="project-title">Walmart Easter 05 campaign directed by Alex Bailey</div>
+      <div class="project-title">Walmart Easter 05</div>
     </div>
 
     <div class="project">
       <div class="video-container">
         <iframe src="https://www.youtube.com/embed/ztLQ4hblOq4?controls=1&modestbranding=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <div class="project-title">Walmart Easter 06 campaign directed by Alex Bailey</div>
+      <div class="project-title">Walmart Easter 06</div>
     </div>
 
     <div class="project">
       <div class="video-container">
         <iframe src="https://www.youtube.com/embed/hwRLHxZRwxc?controls=1&modestbranding=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <div class="project-title">Walmart Easter 07 campaign directed by Alex Bailey</div>
+      <div class="project-title">Walmart Easter 07</div>
     </div>
   </main>
 
@@ -147,5 +175,6 @@
       }
     });
   </script>
+
 </body>
 </html>
